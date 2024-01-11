@@ -1,6 +1,6 @@
-import { UserInformation } from "./types";
+import { TUserInformation } from "./types";
 
-export const InfoRow = ({ label, value }: { label: string; value: string }) => {
+export const InfoRow = ({ label, value }: { label: string; value: string | null }) => {
   return (
     <div>
       <span style={{ marginRight: 5 }}>
@@ -13,7 +13,7 @@ export const InfoRow = ({ label, value }: { label: string; value: string }) => {
 export const ProfileInformation = ({
   userData,
 }: {
-  userData: UserInformation | null;
+  userData: TUserInformation | null;
 }) => {
   if (!userData) {
     return (
@@ -39,7 +39,10 @@ export const ProfileInformation = ({
         <InfoRow label="Last Name" value={lastName} />
         <InfoRow label="City" value={city} />
         {/* You will need to format the string "nnnnnnn" as "nn-nn-nn-n" */}
-        <InfoRow label="Phone" value={"12-34-56-7"} />
+        {phone !== null && (<InfoRow
+          label="Phone"
+          value={`${phone[0]}-${phone[1]}-${phone[2]}-${phone[3]}`}
+        />)}
       </div>
     </>
   );
