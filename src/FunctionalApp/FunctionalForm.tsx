@@ -6,15 +6,16 @@ import { FunctionalPhoneInput, PhoneInputState } from "./FunctionalPhoneInput";
 import { TUserInformation } from "../types";
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
-const firstNameCharacterErrorMessage =
-  "First name must consist of letters only";
 const lastNameErrorMessage = "Last name must be at least 2 characters long";
-const lastNameCharacterErrorMessage = "Last name must consist of letters only";
 const emailErrorMessage = "Email is Invalid";
 const cityErrorMessage = "State is Invalid";
 const phoneNumberErrorMessage = "Invalid Phone Number";
 
-export const FunctionalForm = ({handleUserInfo} : {handleUserInfo: (userInformation : TUserInformation) => void;}) => {
+export const FunctionalForm = ({
+  handleUserInfo,
+}: {
+  handleUserInfo: (userInformation: TUserInformation) => void;
+}) => {
   const [firstNameInput, setFirstNameInput] = useState("");
   const [lastNameInput, setLastNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
@@ -28,16 +29,13 @@ export const FunctionalForm = ({handleUserInfo} : {handleUserInfo: (userInformat
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
-  const isFirstNameValid = firstNameInput ? firstNameInput.length > 2: false;
-  const isFirstNameLettersOnly = firstNameInput ? /^[a-zA-Z]+$/.test(firstNameInput): false;
+  const isALetter = /^[A-Za-z]+$/;
+
+  const isFirstNameValid = firstNameInput ? firstNameInput.length > 2 : false;
   const showFirstNameError = isFormSubmitted && !isFirstNameValid;
-  const showFirstNameCharacterError =
-    isFormSubmitted && !isFirstNameLettersOnly;
 
   const isLastNameValid = lastNameInput ? lastNameInput.length > 2 : false;
-  const isLastNameLettersOnly = lastNameInput ? /^[a-zA-Z]+$/.test(lastNameInput): false;
   const showLastNameError = isFormSubmitted && !isLastNameValid;
-  const showLastNameCharacterError = isFormSubmitted && !isLastNameLettersOnly;
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const isEmailValid = emailRegex.test(emailInput);
@@ -52,16 +50,15 @@ export const FunctionalForm = ({handleUserInfo} : {handleUserInfo: (userInformat
   const showPhoneError = isFormSubmitted && !isPhoneValid;
 
   let doesFormHaveErrors = true;
-  if (!showFirstNameError && !showFirstNameCharacterError && !showLastNameError && !showLastNameCharacterError && !showEmailError && isCityValid(selectedCity) &&!showPhoneError) {
+  if (
+    !showFirstNameError &&
+    !showLastNameError &&
+    !showEmailError &&
+    isCityValid(selectedCity) &&
+    !showPhoneError
+  ) {
     doesFormHaveErrors = false;
   }
-
-  /*function validateEmail(email: string) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isEmailValid = emailRegex.test(email);
-    const showEmailError = isFormSubmitted && !isEmailValid;
-    return showEmailError;
-  }*/
 
   return (
     <form
@@ -69,16 +66,16 @@ export const FunctionalForm = ({handleUserInfo} : {handleUserInfo: (userInformat
         e.preventDefault();
         setIsFormSubmitted(true);
         if (doesFormHaveErrors) {
-          alert('Form has errors.')
+          alert("Bad Inputs.");
         } else {
-        handleUserInfo({
-          firstName: firstNameInput,
-          lastName : lastNameInput,
-          email : emailInput,
-          city : selectedCity,
-          phone : phoneInput
-        });
-      }
+          handleUserInfo({
+            firstName: firstNameInput,
+            lastName: lastNameInput,
+            email: emailInput,
+            city: selectedCity,
+            phone: phoneInput,
+          });
+        }
       }}
     >
       <u>
@@ -91,18 +88,14 @@ export const FunctionalForm = ({handleUserInfo} : {handleUserInfo: (userInformat
         <input
           placeholder="Bilbo"
           onChange={(e) => {
-            setFirstNameInput(e.target.value);
+            if (e.target.value.match(isALetter)) {
+              setFirstNameInput(e.target.value);
+            }
           }}
-          value={firstNameInput ?? ''}
+          value={firstNameInput ?? ""}
         />
       </div>
       <ErrorMessage message={firstNameErrorMessage} show={showFirstNameError} />
-      {!showFirstNameError && (
-        <ErrorMessage
-          message={firstNameCharacterErrorMessage}
-          show={showFirstNameCharacterError}
-        />
-      )}
 
       {/* last name input */}
       <div className="input-wrap">
@@ -110,18 +103,15 @@ export const FunctionalForm = ({handleUserInfo} : {handleUserInfo: (userInformat
         <input
           placeholder="Baggins"
           onChange={(e) => {
-            setLastNameInput(e.target.value);
+            if (e.target.value.match(isALetter)) {
+              setLastNameInput(e.target.value);
+            }
           }}
           value={lastNameInput ?? ""}
         />
       </div>
       <ErrorMessage message={lastNameErrorMessage} show={showLastNameError} />
-      {!showLastNameError && (
-        <ErrorMessage
-          message={lastNameCharacterErrorMessage}
-          show={showLastNameCharacterError}
-        />
-      )}
+
 
       {/* Email Input */}
       <div className="input-wrap">
@@ -155,11 +145,11 @@ export const FunctionalForm = ({handleUserInfo} : {handleUserInfo: (userInformat
       </div>
       <ErrorMessage
         message={cityErrorMessage}
-        show={ !isCityValid(selectedCity) && isFormSubmitted}
+        show={!isCityValid(selectedCity) && isFormSubmitted}
       />
 
       <FunctionalPhoneInput
-        phoneInputState={phoneInput || (['','','',''] as PhoneInputState)} 
+        phoneInputState={phoneInput || (["", "", "", ""] as PhoneInputState)}
         setPhoneInputState={setPhoneInput}
       />
 
