@@ -42,7 +42,6 @@ export class ClassPhoneInput extends Component<ClassPhoneInputProps> {
         ) as PhoneInputState;
 
         if (numbersOnly || isBackspace) {
-          console.log(newState);
           if (shouldGoToNextRef) {
             nextRef.current?.focus();
           }
@@ -51,7 +50,6 @@ export class ClassPhoneInput extends Component<ClassPhoneInputProps> {
           }
           handlePhoneInputChange(newState);
         }
-        console.log(phoneInputState);
       };
 
     return (
