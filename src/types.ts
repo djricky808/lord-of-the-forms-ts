@@ -1,4 +1,5 @@
-import { PhoneInputState } from "./FunctionalApp/FunctionalPhoneInput";
+export type PhoneInputState = string[];
+
 export type TUserInformation = {
   firstName: string;
   lastName: string;

@@ -1,6 +1,6 @@
 import { ChangeEventHandler, Dispatch, SetStateAction, useRef } from "react";
+import { PhoneInputState } from "../types";
 
-export type PhoneInputState = [string, string, string, string];
 
 export const FunctionalPhoneInput = ({
   phoneInputState,
@@ -40,6 +40,7 @@ export const FunctionalPhoneInput = ({
       ) as PhoneInputState;
 
       if (numbersOnly || isBackspace) {
+        console.log(newState);
         if (shouldGoToNextRef) {
           nextRef.current?.focus();
         }

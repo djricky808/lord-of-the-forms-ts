@@ -2,8 +2,8 @@ import { useState } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import { allCities } from "../utils/all-cities";
 import { isCityValid } from "../utils/validations";
-import { FunctionalPhoneInput, PhoneInputState } from "./FunctionalPhoneInput";
-import { TUserInformation } from "../types";
+import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
+import { PhoneInputState, TUserInformation } from "../types";
 import { isEmailValid } from "../utils/validations"
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
@@ -119,7 +119,6 @@ export const FunctionalForm = ({
           placeholder="bilbo-baggins@adventurehobbits.net"
           onChange={(e) => {
             setEmailInput(e.target.value);
-            isEmailValid(emailInput);
           }}
           value={emailInput ?? ""}
         />
