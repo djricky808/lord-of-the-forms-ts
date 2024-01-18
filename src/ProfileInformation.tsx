@@ -1,6 +1,12 @@
 import { TUserInformation } from "./types";
 
-export const InfoRow = ({ label, value }: { label: string; value: string | null }) => {
+export const InfoRow = ({
+  label,
+  value,
+}: {
+  label: string;
+  value: string | null;
+}) => {
   return (
     <div>
       <span style={{ marginRight: 5 }}>

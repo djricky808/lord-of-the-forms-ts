@@ -4,7 +4,7 @@ import { allCities } from "../utils/all-cities";
 import { isCityValid } from "../utils/validations";
 import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
 import { PhoneInputState, TUserInformation } from "../types";
-import { isEmailValid } from "../utils/validations"
+import { isEmailValid } from "../utils/validations";
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
 const lastNameErrorMessage = "Last name must be at least 2 characters long";
@@ -87,7 +87,7 @@ export const FunctionalForm = ({
           onChange={(e) => {
             if (
               e.target.value.match(isALetter) ||
-              e.target.value.length <firstNameInput.length
+              e.target.value.length < firstNameInput.length
             ) {
               setFirstNameInput(e.target.value);
             }
@@ -103,7 +103,10 @@ export const FunctionalForm = ({
         <input
           placeholder="Baggins"
           onChange={(e) => {
-            if (e.target.value.match(isALetter) || e.target.value.length < lastNameInput.length) {
+            if (
+              e.target.value.match(isALetter) ||
+              e.target.value.length < lastNameInput.length
+            ) {
               setLastNameInput(e.target.value);
             }
           }}
@@ -123,7 +126,10 @@ export const FunctionalForm = ({
           value={emailInput ?? ""}
         />
       </div>
-      <ErrorMessage message={emailErrorMessage} show={!isEmailValid(emailInput) && isFormSubmitted} />
+      <ErrorMessage
+        message={emailErrorMessage}
+        show={!isEmailValid(emailInput) && isFormSubmitted}
+      />
 
       {/* City Input */}
       <div className="input-wrap">

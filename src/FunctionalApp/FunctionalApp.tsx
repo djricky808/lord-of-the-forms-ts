@@ -4,7 +4,8 @@ import { FunctionalForm } from "./FunctionalForm";
 import { useState } from "react";
 
 export const FunctionalApp = () => {
-  const [userInformation, setUserInformation] = useState<TUserInformation | null>(null);
+  const [userInformation, setUserInformation] =
+    useState<TUserInformation | null>(null);
 
   return (
     <>

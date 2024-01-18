@@ -7,21 +7,20 @@ type State = { userInformation: TUserInformation | null };
 export class ClassApp extends Component<Record<string, never>, State> {
   state = {
     userInformation: null,
-    }
+  };
   handleUserInfo = (userInformation: TUserInformation) => {
-    this.setState({userInformation});
-  }
+    this.setState({ userInformation });
+  };
 
   render() {
     return (
       <>
         <h2>Class</h2>
-        <ProfileInformation
-          userData={this.state.userInformation}
+        <ProfileInformation userData={this.state.userInformation} />
+        <ClassForm
+          userInformation={this.state.userInformation}
+          handleUserInfo={this.handleUserInfo}
         />
-        <ClassForm 
-        userInformation={this.state.userInformation}
-        handleUserInfo= {this.handleUserInfo} />
       </>
     );
   }

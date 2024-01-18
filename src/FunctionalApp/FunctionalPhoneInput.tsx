@@ -1,7 +1,6 @@
 import { ChangeEventHandler, Dispatch, SetStateAction, useRef } from "react";
 import { PhoneInputState } from "../types";
 
-
 export const FunctionalPhoneInput = ({
   phoneInputState,
   setPhoneInputState,
