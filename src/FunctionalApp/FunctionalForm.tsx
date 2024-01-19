@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { ErrorMessage } from "../ErrorMessage";
 import { allCities } from "../utils/all-cities";
-import { isCityValid } from "../utils/validations";
+import { isCityValid, isPhoneValid } from "../utils/validations";
+import { FunctionalTextInput } from "./FunctionalTextInput";
 import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
 import { PhoneInputState, TUserInformation } from "../types";
 import { isEmailValid } from "../utils/validations";
+
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
 const lastNameErrorMessage = "Last name must be at least 2 characters long";
@@ -30,21 +32,19 @@ export const FunctionalForm = ({
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
-  const isALetter = /^[A-Za-z]+$/;
-
   const isFirstNameValid = firstNameInput ? firstNameInput.length > 2 : false;
   const showFirstNameError = isFormSubmitted && !isFirstNameValid;
 
   const isLastNameValid = lastNameInput ? lastNameInput.length > 2 : false;
   const showLastNameError = isFormSubmitted && !isLastNameValid;
 
-  const isPhoneValid =
-    phoneInput.length == 4 &&
-    phoneInput[0].length == 2 &&
-    phoneInput[1].length == 2 &&
-    phoneInput[2].length == 2 &&
-    phoneInput[3].length == 1;
-  const showPhoneError = isFormSubmitted && !isPhoneValid;
+  // const isPhoneValid =
+  //   phoneInput.length == 4 &&
+  //   phoneInput[0].length == 2 &&
+  //   phoneInput[1].length == 2 &&
+  //   phoneInput[2].length == 2 &&
+  //   phoneInput[3].length == 1;
+  // const showPhoneError = isFormSubmitted && !isPhoneValid;
 
   let doesFormHaveErrors = true;
   if (
@@ -52,7 +52,7 @@ export const FunctionalForm = ({
     !showLastNameError &&
     isEmailValid(emailInput) &&
     isCityValid(selectedCity) &&
-    !showPhoneError
+    isPhoneValid(phoneInput)
   ) {
     doesFormHaveErrors = false;
   }
@@ -80,39 +80,11 @@ export const FunctionalForm = ({
       </u>
 
       {/* first name input */}
-      <div className="input-wrap">
-        <label>{"First Name"}:</label>
-        <input
-          placeholder="Bilbo"
-          onChange={(e) => {
-            if (
-              e.target.value.match(isALetter) ||
-              e.target.value.length < firstNameInput.length
-            ) {
-              setFirstNameInput(e.target.value);
-            }
-          }}
-          value={firstNameInput ?? ""}
-        />
-      </div>
+      <FunctionalTextInput nameInput={firstNameInput} setNameInput={setFirstNameInput} placeholder='Bilbo' label="First Name" />
       <ErrorMessage message={firstNameErrorMessage} show={showFirstNameError} />
 
       {/* last name input */}
-      <div className="input-wrap">
-        <label>{"Last Name"}:</label>
-        <input
-          placeholder="Baggins"
-          onChange={(e) => {
-            if (
-              e.target.value.match(isALetter) ||
-              e.target.value.length < lastNameInput.length
-            ) {
-              setLastNameInput(e.target.value);
-            }
-          }}
-          value={lastNameInput ?? ""}
-        />
-      </div>
+      <FunctionalTextInput nameInput={lastNameInput} setNameInput={setLastNameInput} placeholder='Baggins' label="Last Name" />
       <ErrorMessage message={lastNameErrorMessage} show={showLastNameError} />
 
       {/* Email Input */}
@@ -157,7 +129,7 @@ export const FunctionalForm = ({
         setPhoneInputState={setPhoneInput}
       />
 
-      <ErrorMessage message={phoneNumberErrorMessage} show={showPhoneError} />
+      <ErrorMessage message={phoneNumberErrorMessage} show={!isPhoneValid(phoneInput) && isFormSubmitted} />
 
       <input type="submit" value="Submit" />
     </form>
