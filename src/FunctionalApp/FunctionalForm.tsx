@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ErrorMessage } from "../ErrorMessage";
-import { allCities } from "../utils/all-cities";
 import { isCityValid, isPhoneValid } from "../utils/validations";
 import { FunctionalTextInput } from "./FunctionalTextInput";
 import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
@@ -8,7 +7,6 @@ import { PhoneInputState, TUserInformation } from "../types";
 import { isEmailValid } from "../utils/validations";
 import { FunctionalEmailInput } from "./FunctionalEmailInput";
 import { FunctionalCityInput } from "./FunctionalCityInput";
-
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
 const lastNameErrorMessage = "Last name must be at least 2 characters long";
@@ -39,14 +37,6 @@ export const FunctionalForm = ({
 
   const isLastNameValid = lastNameInput ? lastNameInput.length > 2 : false;
   const showLastNameError = isFormSubmitted && !isLastNameValid;
-
-  // const isPhoneValid =
-  //   phoneInput.length == 4 &&
-  //   phoneInput[0].length == 2 &&
-  //   phoneInput[1].length == 2 &&
-  //   phoneInput[2].length == 2 &&
-  //   phoneInput[3].length == 1;
-  // const showPhoneError = isFormSubmitted && !isPhoneValid;
 
   let doesFormHaveErrors = true;
   if (
@@ -83,8 +73,8 @@ export const FunctionalForm = ({
 
       {/* first name input */}
       <FunctionalTextInput
-        nameInput={firstNameInput}
-        setNameInput={setFirstNameInput}
+        textInput={firstNameInput}
+        setTextInput={setFirstNameInput}
         placeholder="Bilbo"
         label="First Name"
       />
@@ -92,8 +82,8 @@ export const FunctionalForm = ({
 
       {/* last name input */}
       <FunctionalTextInput
-        nameInput={lastNameInput}
-        setNameInput={setLastNameInput}
+        textInput={lastNameInput}
+        setTextInput={setLastNameInput}
         placeholder="Baggins"
         label="Last Name"
       />
@@ -101,34 +91,24 @@ export const FunctionalForm = ({
 
       {/* Email Input */}
       <FunctionalEmailInput
-        label="Email"
+        textInput={emailInput}
+        setTextInput={setEmailInput}
         placeholder="bilbo-baggins@adventurehobbits.net"
-        emailInput={emailInput}
-        setEmailInput={setEmailInput}
+        label="Email"
       />
-
       <ErrorMessage
         message={emailErrorMessage}
         show={!isEmailValid(emailInput) && isFormSubmitted}
       />
 
       {/* City Input */}
-      {/* <div className="input-wrap">
-        <label>{"City"}:</label>
-        <input
-          type="text"
-          placeholder="Hobbiton"
-          value={selectedCity ?? ""}
-          onChange={(e) => setSelectedCity(e.target.value)}
-          list="options"
-        />
-        <datalist id="options">
-          {allCities.map((city, index) => (
-            <option key={index} value={city} />
-          ))}
-        </datalist>
-      </div> */}
-      <FunctionalCityInput label='city' placeholder="Hobbiton" selectedCity={selectedCity} setSelectedCity={setSelectedCity} />
+  
+      <FunctionalCityInput
+        label="City"
+        placeholder="Hobbiton"
+        textInput={selectedCity}
+        setTextInput={setSelectedCity}
+      />
       <ErrorMessage
         message={cityErrorMessage}
         show={!isCityValid(selectedCity) && isFormSubmitted}

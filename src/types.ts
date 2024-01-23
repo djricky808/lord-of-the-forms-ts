@@ -7,3 +7,11 @@ export type TUserInformation = {
   city: string;
   phone: PhoneInputState;
 };
+
+
+export type TextInputProps ={
+  placeholder:string;
+  textInput: string;
+  setTextInput: (textInput:string) => void;
+  label: string;
+}

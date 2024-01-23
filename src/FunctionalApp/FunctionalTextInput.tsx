@@ -1,16 +1,12 @@
+import { TextInputProps } from "../types";
 import { isALetter } from "../utils/validations";
 
 export const FunctionalTextInput = ({
-  nameInput,
-  setNameInput,
+  textInput,
+  setTextInput,
   placeholder,
   label,
-}: {
-  nameInput: string;
-  setNameInput: (nameInput: string) => void;
-  placeholder: string;
-  label: string;
-}) => {
+}: TextInputProps) => {
   return (
     <div className="input-wrap">
       <label>{label}:</label>
@@ -19,14 +15,12 @@ export const FunctionalTextInput = ({
         onChange={(e) => {
           if (
             e.target.value.match(isALetter) ||
-            e.target.value.length < nameInput.length
-          ) {
-            setNameInput(e.target.value);
+            e.target.value.length < textInput.length
+          ) 
+            setTextInput(e.target.value);
           }
-        console.log(e.target.value);
-        }}
-        value={nameInput ?? ""}
-        
+        }
+        value={textInput ?? ""}
       />
     </div>
   );

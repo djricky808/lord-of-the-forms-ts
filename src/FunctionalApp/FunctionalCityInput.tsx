@@ -1,24 +1,15 @@
+import { TextInputProps } from "../types";
 import { allCities } from "../utils/all-cities";
 
-export const FunctionalCityInput = ({
-  label,
-  placeholder,
-  selectedCity,
-  setSelectedCity,
-}: {
-  label: string;
-  placeholder: string;
-  selectedCity: string;
-  setSelectedCity: (selectedCity: string) => void;
-}) => {
+export const FunctionalCityInput = ({label,placeholder, textInput, setTextInput} : TextInputProps) => {
   return (
     <div className="input-wrap">
       <label>{label}:</label>
       <input
         type="text"
         placeholder={placeholder}
-        value={selectedCity ?? ""}
-        onChange={(e) => setSelectedCity(e.target.value)}
+        value={textInput ?? ""}
+        onChange={(e) => setTextInput(e.target.value)}
         list="options"
       />
       <datalist id="options">
@@ -28,4 +19,4 @@ export const FunctionalCityInput = ({
       </datalist>
     </div>
   );
-};
+}
