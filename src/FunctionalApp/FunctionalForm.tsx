@@ -6,6 +6,8 @@ import { FunctionalTextInput } from "./FunctionalTextInput";
 import { FunctionalPhoneInput } from "./FunctionalPhoneInput";
 import { PhoneInputState, TUserInformation } from "../types";
 import { isEmailValid } from "../utils/validations";
+import { FunctionalEmailInput } from "./FunctionalEmailInput";
+import { FunctionalCityInput } from "./FunctionalCityInput";
 
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
@@ -80,31 +82,38 @@ export const FunctionalForm = ({
       </u>
 
       {/* first name input */}
-      <FunctionalTextInput nameInput={firstNameInput} setNameInput={setFirstNameInput} placeholder='Bilbo' label="First Name" />
+      <FunctionalTextInput
+        nameInput={firstNameInput}
+        setNameInput={setFirstNameInput}
+        placeholder="Bilbo"
+        label="First Name"
+      />
       <ErrorMessage message={firstNameErrorMessage} show={showFirstNameError} />
 
       {/* last name input */}
-      <FunctionalTextInput nameInput={lastNameInput} setNameInput={setLastNameInput} placeholder='Baggins' label="Last Name" />
+      <FunctionalTextInput
+        nameInput={lastNameInput}
+        setNameInput={setLastNameInput}
+        placeholder="Baggins"
+        label="Last Name"
+      />
       <ErrorMessage message={lastNameErrorMessage} show={showLastNameError} />
 
       {/* Email Input */}
-      <div className="input-wrap">
-        <label>{"Email"}:</label>
-        <input
-          placeholder="bilbo-baggins@adventurehobbits.net"
-          onChange={(e) => {
-            setEmailInput(e.target.value);
-          }}
-          value={emailInput ?? ""}
-        />
-      </div>
+      <FunctionalEmailInput
+        label="Email"
+        placeholder="bilbo-baggins@adventurehobbits.net"
+        emailInput={emailInput}
+        setEmailInput={setEmailInput}
+      />
+
       <ErrorMessage
         message={emailErrorMessage}
         show={!isEmailValid(emailInput) && isFormSubmitted}
       />
 
       {/* City Input */}
-      <div className="input-wrap">
+      {/* <div className="input-wrap">
         <label>{"City"}:</label>
         <input
           type="text"
@@ -118,7 +127,8 @@ export const FunctionalForm = ({
             <option key={index} value={city} />
           ))}
         </datalist>
-      </div>
+      </div> */}
+      <FunctionalCityInput label='city' placeholder="Hobbiton" selectedCity={selectedCity} setSelectedCity={setSelectedCity} />
       <ErrorMessage
         message={cityErrorMessage}
         show={!isCityValid(selectedCity) && isFormSubmitted}
@@ -129,7 +139,10 @@ export const FunctionalForm = ({
         setPhoneInputState={setPhoneInput}
       />
 
-      <ErrorMessage message={phoneNumberErrorMessage} show={!isPhoneValid(phoneInput) && isFormSubmitted} />
+      <ErrorMessage
+        message={phoneNumberErrorMessage}
+        show={!isPhoneValid(phoneInput) && isFormSubmitted}
+      />
 
       <input type="submit" value="Submit" />
     </form>
