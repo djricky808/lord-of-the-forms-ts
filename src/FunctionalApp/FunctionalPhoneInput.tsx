@@ -39,7 +39,6 @@ export const FunctionalPhoneInput = ({
       ) as PhoneInputState;
 
       if (numbersOnly || isBackspace) {
- 
         if (shouldGoToNextRef) {
           nextRef.current?.focus();
         }

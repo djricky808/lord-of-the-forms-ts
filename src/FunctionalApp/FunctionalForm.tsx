@@ -102,7 +102,7 @@ export const FunctionalForm = ({
       />
 
       {/* City Input */}
-  
+
       <FunctionalCityInput
         label="City"
         placeholder="Hobbiton"

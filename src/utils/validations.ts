@@ -16,15 +16,16 @@ export function isCityValid(input: string) {
   }
 }
 
-export  const isPhoneValid = (phoneInput:PhoneInputState) => {
-  if (phoneInput.length == 4 &&
+export const isPhoneValid = (phoneInput: PhoneInputState) => {
+  if (
+    phoneInput.length == 4 &&
     phoneInput[0].length == 2 &&
     phoneInput[1].length == 2 &&
     phoneInput[2].length == 2 &&
-    phoneInput[3].length == 1){
-      return true;
-    } else {
+    phoneInput[3].length == 1
+  ) {
+    return true;
+  } else {
     return false;
-    }
-}
-    
+  }
+};

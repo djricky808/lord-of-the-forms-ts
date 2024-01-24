@@ -42,24 +42,12 @@ export const ProfileInformation = ({
       </u>
       <div className="user-info">
         <InfoRow label="Email" value={email} />
-        <InfoRow
-          label="First Name"
-          value= {capitalize(firstName)}
-        />
-        <InfoRow
-          label="Last Name"
-          value={capitalize(lastName)}
-        />
-        <InfoRow
-          label="City"
-          value={capitalize(city)}
-        />
+        <InfoRow label="First Name" value={capitalize(firstName)} />
+        <InfoRow label="Last Name" value={capitalize(lastName)} />
+        <InfoRow label="City" value={capitalize(city)} />
         {/* You will need to format the string "nnnnnnn" as "nn-nn-nn-n" */}
         {phone !== null && (
-          <InfoRow
-            label="Phone"
-            value={formatPhoneNumber(phone)}
-          />
+          <InfoRow label="Phone" value={formatPhoneNumber(phone)} />
         )}
       </div>
     </>

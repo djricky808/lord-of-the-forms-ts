@@ -48,14 +48,6 @@ export class ClassForm extends Component<UserInformationProps> {
       this.setState({ phoneInput: newState });
     };
 
-    // const isPhoneValid =
-    //   phoneInput.length == 4 &&
-    //   phoneInput[0].length == 2 &&
-    //   phoneInput[1].length == 2 &&
-    //   phoneInput[2].length == 2 &&
-    //   phoneInput[3].length == 1;
-    // const showPhoneError = isFormSubmitted && !isPhoneValid;
-
     let doesFormHaveErrors = true;
     if (
       !showFirstNameError &&
@@ -117,7 +109,7 @@ export class ClassForm extends Component<UserInformationProps> {
           textInput={emailInput}
           label="Email"
           placeholder="bilbo-baggins@adventurehobbits.net"
-          setTextInput={(value) => this.setState({emailInput: value})}
+          setTextInput={(value) => this.setState({ emailInput: value })}
         />
         <ErrorMessage
           message={emailErrorMessage}
@@ -125,21 +117,11 @@ export class ClassForm extends Component<UserInformationProps> {
         />
 
         {/* City Input */}
-        {/* <div className="input-wrap">
-          <label>{"City"}:</label>
-          <input
-            type="text"
-            placeholder="Hobbiton"
-            value={selectedCity ?? ""}
-            onChange={(e) => this.setState({ selectedCity: e.target.value })}
-            list="options"
-          />
-        </div> */}
         <ClassCityInput
           textInput={selectedCity}
           label="City"
           placeholder="Hobbiton"
-          setTextInput={(input) => this.setState({selectedCity: input})}
+          setTextInput={(input) => this.setState({ selectedCity: input })}
         />
         <ErrorMessage
           message={cityErrorMessage}

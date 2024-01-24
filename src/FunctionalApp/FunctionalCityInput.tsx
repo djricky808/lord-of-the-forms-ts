@@ -1,7 +1,12 @@
 import { TextInputProps } from "../types";
 import { allCities } from "../utils/all-cities";
 
-export const FunctionalCityInput = ({label,placeholder, textInput, setTextInput} : TextInputProps) => {
+export const FunctionalCityInput = ({
+  label,
+  placeholder,
+  textInput,
+  setTextInput,
+}: TextInputProps) => {
   return (
     <div className="input-wrap">
       <label>{label}:</label>
@@ -19,4 +24,4 @@ export const FunctionalCityInput = ({label,placeholder, textInput, setTextInput}
       </datalist>
     </div>
   );
-}
+};

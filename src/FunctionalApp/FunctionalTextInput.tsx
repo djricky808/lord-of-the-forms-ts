@@ -16,10 +16,9 @@ export const FunctionalTextInput = ({
           if (
             e.target.value.match(isALetter) ||
             e.target.value.length < textInput.length
-          ) 
+          )
             setTextInput?.(e.target.value);
-          }
-        }
+        }}
         value={textInput ?? ""}
       />
     </div>
