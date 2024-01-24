@@ -12,6 +12,6 @@ export type TUserInformation = {
 export type TextInputProps ={
   placeholder:string;
   textInput: string;
-  setTextInput: (textInput:string) => void;
+  setTextInput?: (textInput:string) => void;
   label: string;
 }

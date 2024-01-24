@@ -9,7 +9,7 @@ export const FunctionalCityInput = ({label,placeholder, textInput, setTextInput}
         type="text"
         placeholder={placeholder}
         value={textInput ?? ""}
-        onChange={(e) => setTextInput(e.target.value)}
+        onChange={(e) => setTextInput?.(e.target.value)}
         list="options"
       />
       <datalist id="options">

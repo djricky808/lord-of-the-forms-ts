@@ -6,7 +6,7 @@ return (<div className="input-wrap">
   <input
     placeholder={placeholder}
     onChange={(e) => {
-      setTextInput(e.target.value);
+      setTextInput?.(e.target.value);
     }}
     value={textInput ?? ""}
   />

@@ -1,8 +1,11 @@
 import { Component } from "react";
 import { ErrorMessage } from "../ErrorMessage";
-import { isEmailValid, isCityValid } from "../utils/validations";
+import { isEmailValid, isCityValid, isPhoneValid } from "../utils/validations";
 import { ClassPhoneInput } from "./ClassPhoneInput";
 import { PhoneInputState, TUserInformation } from "../types";
+import { ClassTextInput } from "./ClassTextInput";
+import { ClassEmailInput } from "./ClassEmailInput";
+import { ClassCityInput } from "./ClassCityInput";
 
 const firstNameErrorMessage = "First name must be at least 2 characters long";
 const lastNameErrorMessage = "Last name must be at least 2 characters long";
@@ -26,8 +29,6 @@ export class ClassForm extends Component<UserInformationProps> {
   };
 
   render() {
-    const isALetter = /^[A-Za-z]+$/;
-
     const {
       firstNameInput,
       lastNameInput,
@@ -46,13 +47,14 @@ export class ClassForm extends Component<UserInformationProps> {
     const handlePhoneInputChange = (newState: PhoneInputState) => {
       this.setState({ phoneInput: newState });
     };
-    const isPhoneValid =
-      phoneInput.length == 4 &&
-      phoneInput[0].length == 2 &&
-      phoneInput[1].length == 2 &&
-      phoneInput[2].length == 2 &&
-      phoneInput[3].length == 1;
-    const showPhoneError = isFormSubmitted && !isPhoneValid;
+
+    // const isPhoneValid =
+    //   phoneInput.length == 4 &&
+    //   phoneInput[0].length == 2 &&
+    //   phoneInput[1].length == 2 &&
+    //   phoneInput[2].length == 2 &&
+    //   phoneInput[3].length == 1;
+    // const showPhoneError = isFormSubmitted && !isPhoneValid;
 
     let doesFormHaveErrors = true;
     if (
@@ -60,7 +62,7 @@ export class ClassForm extends Component<UserInformationProps> {
       !showLastNameError &&
       isEmailValid(emailInput) &&
       isCityValid(selectedCity) &&
-      !showPhoneError
+      isPhoneValid(phoneInput)
     ) {
       doesFormHaveErrors = false;
     }
@@ -90,62 +92,40 @@ export class ClassForm extends Component<UserInformationProps> {
         </u>
 
         {/* first name input */}
-        <div className="input-wrap">
-          <label>{"First Name"}:</label>
-          <input
-            placeholder="Bilbo"
-            onChange={(e) => {
-              if (
-                e.target.value.match(isALetter) ||
-                e.target.value.length < firstNameInput.length
-              ) {
-                this.setState({ firstNameInput: e.target.value });
-              }
-            }}
-            value={firstNameInput ?? ""}
-          />
-        </div>
+        <ClassTextInput
+          textInput={firstNameInput}
+          label="First Name"
+          placeholder="Bilbo"
+          setTextInput={(input) => this.setState({ firstNameInput: input })}
+        />
         <ErrorMessage
           message={firstNameErrorMessage}
           show={showFirstNameError}
         />
 
         {/* last name input */}
-        <div className="input-wrap">
-          <label>{"Last Name"}:</label>
-          <input
-            placeholder="Baggins"
-            onChange={(e) => {
-              if (
-                e.target.value.match(isALetter) ||
-                e.target.value.length < lastNameInput.length
-              ) {
-                this.setState({ lastNameInput: e.target.value });
-              }
-            }}
-            value={lastNameInput ?? ""}
-          />
-        </div>
+        <ClassTextInput
+          textInput={lastNameInput}
+          label="Last Name"
+          placeholder="Baggins"
+          setTextInput={(input) => this.setState({ lastNameInput: input })}
+        />
         <ErrorMessage message={lastNameErrorMessage} show={showLastNameError} />
 
         {/* Email Input */}
-        <div className="input-wrap">
-          <label>{"Email"}:</label>
-          <input
-            placeholder="bilbo-baggins@adventurehobbits.net"
-            onChange={(e) => {
-              this.setState({ emailInput: e.target.value });
-              isEmailValid(emailInput);
-            }}
-          />
-        </div>
+        <ClassEmailInput
+          textInput={emailInput}
+          label="Email"
+          placeholder="bilbo-baggins@adventurehobbits.net"
+          setTextInput={(value) => this.setState({emailInput: value})}
+        />
         <ErrorMessage
           message={emailErrorMessage}
           show={!isEmailValid(emailInput) && isFormSubmitted}
         />
 
         {/* City Input */}
-        <div className="input-wrap">
+        {/* <div className="input-wrap">
           <label>{"City"}:</label>
           <input
             type="text"
@@ -154,7 +134,13 @@ export class ClassForm extends Component<UserInformationProps> {
             onChange={(e) => this.setState({ selectedCity: e.target.value })}
             list="options"
           />
-        </div>
+        </div> */}
+        <ClassCityInput
+          textInput={selectedCity}
+          label="City"
+          placeholder="Hobbiton"
+          setTextInput={(input) => this.setState({selectedCity: input})}
+        />
         <ErrorMessage
           message={cityErrorMessage}
           show={!isCityValid(selectedCity) && isFormSubmitted}
@@ -165,7 +151,10 @@ export class ClassForm extends Component<UserInformationProps> {
           handlePhoneInputChange={handlePhoneInputChange}
         />
 
-        <ErrorMessage message={phoneNumberErrorMessage} show={showPhoneError} />
+        <ErrorMessage
+          message={phoneNumberErrorMessage}
+          show={!isPhoneValid(phoneInput) && isFormSubmitted}
+        />
 
         <input type="submit" value="Submit" />
       </form>

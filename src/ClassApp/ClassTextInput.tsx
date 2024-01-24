@@ -1,12 +1,10 @@
-import { TextInputProps } from "../types";
-import { isALetter } from "../utils/validations";
+import { TextInputProps } from "../types"
+import { Component } from "react"
+import { isALetter } from "../utils/validations"
 
-export const FunctionalTextInput = ({
-  textInput,
-  setTextInput,
-  placeholder,
-  label,
-}: TextInputProps) => {
+export class ClassTextInput extends Component<TextInputProps> {
+  render() {
+    const {textInput, label, placeholder, setTextInput} = this.props
   return (
     <div className="input-wrap">
       <label>{label}:</label>
@@ -16,12 +14,13 @@ export const FunctionalTextInput = ({
           if (
             e.target.value.match(isALetter) ||
             e.target.value.length < textInput.length
-          ) 
+          ) {
             setTextInput?.(e.target.value);
           }
-        }
+        }}
         value={textInput ?? ""}
       />
     </div>
   );
-};
+  }
+}
